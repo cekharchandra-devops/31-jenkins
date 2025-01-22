@@ -27,11 +27,11 @@ pipeline {
             }
         }
         stage('Build') {
-            when {
-                expression { return env.GIT_BRANCH == 'main' }
-            }
+            // when {
+            //     expression { return env.GIT_BRANCH == 'main' }
+            // }
             steps {
-                echo "Building the code for branch: ${env.GIT_BRANCH}"
+                echo "Building the code for branch: ${GIT_BRANCH}"
                 // Add your build steps here
             }
         }
