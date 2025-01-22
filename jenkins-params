@@ -26,13 +26,16 @@ pipeline{
         }
         stage('test') {
             steps{
-                echo "checkout: ${RUN_TESTS}"
+                echo "test: ${RUN_TESTS}"
             }
         }
     }
     post{
         always{
             deleteDir()
+        }
+        success{
+            echo "this will execute when pipleline success"
         }
     }
 }
