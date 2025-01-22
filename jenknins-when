@@ -22,11 +22,11 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Branch name: ${params.BRANCH_NAME}"
+                 echo "brachhh:${env.GIT_BRANCH}"
                 // Add your checkout steps here
             }
         }
         stage('Build') {
-            echo "brachhh:${env.GIT_BRANCH}"
             when {
                 expression { return env.GIT_BRANCH == 'main' }
             }
