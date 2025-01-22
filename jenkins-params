@@ -19,15 +19,11 @@ pipeline{
                 sh 'echo "branch name:"' ${BRANCH_NAME}
             }
         }
-    }
-    stages {
         stage('build'){
             steps{
                 sh 'echo "checkout"'
             }
         }
-    }
-    stages {
         stage('test') {
             steps{
                 sh 'echo "checkout:"' ${RUN_TESTS}
