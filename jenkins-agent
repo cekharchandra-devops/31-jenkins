@@ -4,22 +4,24 @@ pipeline{
     }
     stages{
         stage('checkout'){
-            sh "echo clone git repo"
+            steps{
+                sh "echo clone git repo"
+            }
         }
         stage('build'){
-            sh "echo build the code"
+            steps { sh 'echo build the code' }
         }
         stage('test'){
-            sh "echo execute unit test cases"
+            steps{ sh "echo execute unit test cases" }
         }
         stage('sonarque'){
-            sh "echo scan the code for analysis"
+            steps{ sh "echo scan the code for analysis" }
         }
         stage('package'){
-            sh 'echo package the code'
+            steps { sh 'echo package the code' }
         }
         stage('upload'){
-            sh 'echo upload artifact to nexus'
+            steps{ sh 'echo upload artifact to nexus' }
         }
     }
 
