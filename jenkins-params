@@ -29,6 +29,20 @@ pipeline{
                 echo "test: ${RUN_TESTS}"
             }
         }
+        stage('Approval') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'UserInput', message: 'Approve deployment?', parameters: [
+                            choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'prod'], description: 'Select environment'),
+                            booleanParam(name: 'PROCEED', defaultValue: true, description: 'Proceed with deployment?')
+                        ]
+                    )
+                    echo "Selected environment: ${userInput.DEPLOY_ENV}"
+                    echo "Proceed with deployment: ${userInput.PROCEED}"
+                }
+            }
+        }
     }
     post{
         always{
