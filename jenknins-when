@@ -26,6 +26,7 @@ pipeline {
             }
         }
         stage('Build') {
+            echo "brachhh:${env.GIT_BRANCH}"
             when {
                 expression { return env.GIT_BRANCH == 'main' }
             }
