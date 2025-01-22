@@ -27,9 +27,9 @@ pipeline {
             }
         }
         stage('Build') {
-            // when {
-            //     expression { return env.GIT_BRANCH == 'main' }
-            // }
+            when {
+                expression { return env.GIT_BRANCH == 'origin/main' }
+            }
             steps {
                 echo "Building the code for branch: ${GIT_BRANCH}"
                 // Add your build steps here
