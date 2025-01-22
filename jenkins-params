@@ -21,7 +21,7 @@ pipeline{
         }
         stage('build'){
             steps{
-                sh 'echo "checkout"'
+                echo "checkout: ${ENVIRONMENT}"
             }
         }
         stage('test') {
