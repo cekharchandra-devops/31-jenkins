@@ -14,22 +14,22 @@ pipeline{
  
     }
     stages{
-        stage{
-            steps('checkout'){
+        stage('checkout'){
+            steps{
                 sh 'echo "branch name:"' ${BRANCH_NAME}
             }
         }
     }
     stages {
-        stage {
-            steps('build'){
+        stage('build'){
+            steps{
                 sh 'echo "checkout"'
             }
         }
     }
     stages {
-        stage {
-            steps('test'){
+        stage('test') {
+            steps{
                 sh 'echo "checkout:"' ${RUN_TESTS}
             }
         }
