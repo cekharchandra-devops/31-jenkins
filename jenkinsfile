@@ -18,6 +18,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
+                error 'pipeline fialed'
                 // Add your deployment steps here
             }
         }
