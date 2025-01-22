@@ -1,0 +1,24 @@
+pipeline{
+    agent AGENT-1
+    stages{
+        stage('checkout'){
+            sh echo "clone git repo"
+        }
+        stage('build'){
+            sh echo "build the code"
+        }
+        stage('test'){
+            sh echo "execute unit test cases"
+        }
+        stage('sonarque'){
+            sh echo "scan the code for analysis"
+        }
+        stage('package'){
+            sh echo 'package the code'
+        }
+        stage('upload'){
+            sh echo 'upload artifact to nexus'
+        }
+    }
+
+}
