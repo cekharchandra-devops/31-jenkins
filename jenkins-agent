@@ -2,6 +2,9 @@ pipeline{
     agent {
         label 'AGENT-1'
     }
+     options {
+        timeout(time: 10, unit: 'SECONDS') 
+    }
     stages{
         stage('checkout'){
             steps{
@@ -21,7 +24,10 @@ pipeline{
             steps { sh 'echo package the code' }
         }
         stage('upload'){
-            steps{ sh 'echo upload artifact to nexus' }
+            steps{ 
+                sh 'echo upload artifact to nexus' 
+                sh 'sleep 10'
+            }
         }
     }
     post{
