@@ -16,7 +16,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-                // sh 'echo "branch name:"' ${BRANCH_NAME}
+                sh 'echo "branch name:"' // ${BRANCH_NAME}
             }
         }
         stage('build'){
@@ -26,7 +26,7 @@ pipeline{
         }
         stage('test') {
             steps{
-                // sh 'echo "checkout:"' ${RUN_TESTS}
+                sh 'echo "checkout:"' //${RUN_TESTS}
             }
         }
     }
