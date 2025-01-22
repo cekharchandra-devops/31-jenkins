@@ -5,6 +5,7 @@ pipeline{
      options {
         // timeout(time: 10, unit: 'SECONDS') 
         disableConcurrentBuilds()
+         retry(3)
     }
     stages{
         stage('checkout'){
@@ -27,7 +28,8 @@ pipeline{
         stage('upload'){
             steps{ 
                 sh 'echo upload artifact to nexus' 
-                sh 'sleep 10'
+                // sh 'sleep 10'
+                error 'pipeline failed'
             }
         }
     }
