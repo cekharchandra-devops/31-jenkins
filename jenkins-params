@@ -1,0 +1,37 @@
+pipeline{
+    agent {
+        label 'AGENT-1'
+    }
+    options{
+        timeout(time: 10, unit: 'SECONDS') 
+        disableConcurrentBuilds()
+    }
+    parameters{
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run test cases')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Deployment environment')
+        password(name: 'SECRET_PASSWORD', defaultValue: 'password', description: 'Secret password')
+ 
+    }
+    stages{
+        stage{
+            steps('checkout'){
+                sh 'echo "branch name:"' ${BRANCH_NAME}
+            }
+        }
+    }
+    stages {
+        stage {
+            steps('build'){
+                sh 'echo "checkout"'
+            }
+        }
+    }
+    stages {
+        stage {
+            steps('test'){
+                sh 'echo "checkout:"' ${RUN_TESTS}
+            }
+        }
+    }
+}
