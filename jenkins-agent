@@ -24,5 +24,10 @@ pipeline{
             steps{ sh 'echo upload artifact to nexus' }
         }
     }
+    post{
+        always{
+            deleteDir()
+        }
+    }
 
 }
