@@ -14,9 +14,9 @@ pipeline {
         password(name: 'SECRET_PASSWORD', defaultValue: 'password', description: 'Secret password')
     }
 
-    environment {
-        GIT_BRANCH = "${env.BRANCH_NAME}"
-    }
+    // environment {
+    //     GIT_BRANCH = "${env.BRANCH_NAME}"
+    // }
 
     stages {
         stage('Checkout') {
