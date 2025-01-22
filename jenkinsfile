@@ -12,6 +12,7 @@ pipeline {
             steps {
                 echo 'Testing...'
                 // Add your test steps here
+                sh 'echo testing'
             }
         }
         stage('Deploy') {
@@ -19,6 +20,17 @@ pipeline {
                 echo 'Deploying...'
                 // Add your deployment steps here
             }
+        }
+    }
+    post{
+        always{
+            echo "this section always run"
+        }
+        success{
+            echo "this section runs only pipeline success"
+        }
+        failure{
+            echo "this section runs only pipeline fails"
         }
     }
 }
