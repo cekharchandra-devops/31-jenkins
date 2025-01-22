@@ -1,0 +1,76 @@
+pipeline {
+    agent {
+        label 'AGENT-1'
+    }
+
+    options {
+        disableConcurrentBuilds()
+    }
+
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run test cases')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'Deployment environment')
+        password(name: 'SECRET_PASSWORD', defaultValue: 'password', description: 'Secret password')
+    }
+
+    environment {
+        GIT_BRANCH = "${env.BRANCH_NAME}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Branch name: ${params.BRANCH_NAME}"
+                // Add your checkout steps here
+            }
+        }
+        stage('Build') {
+            when {
+                expression { return env.GIT_BRANCH == 'main' }
+            }
+            steps {
+                echo "Building the code for branch: ${env.GIT_BRANCH}"
+                // Add your build steps here
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Run tests: ${params.RUN_TESTS}"
+                // Add your test steps here
+            }
+        }
+        stage('Approval') {
+            steps {
+                script {
+                    def userInput = input(
+                        id: 'UserInput', message: 'Approve deployment?', parameters: [
+                            choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'prod'], description: 'Select environment'),
+                            booleanParam(name: 'PROCEED', defaultValue: true, description: 'Proceed with deployment?')
+                        ]
+                    )
+                    echo "Selected environment: ${userInput.DEPLOY_ENV}"
+                    echo "Proceed with deployment: ${userInput.PROCEED}"
+                }
+            }
+        }
+        stage('Deploy') {
+            when {
+                allOf {
+                    expression { return params.ENVIRONMENT == 'prod' }
+                    expression { return userInput.PROCEED }
+                }
+            }
+            steps {
+                echo "Deploying to ${userInput.DEPLOY_ENV}"
+                // Add your deployment steps here
+            }
+        }
+    }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
