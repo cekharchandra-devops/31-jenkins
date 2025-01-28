@@ -123,6 +123,11 @@ Result Reporting:
 The agent reports the build results back to the master.
 The master records the results, updates the job status, and provides feedback through the web UI and notifications.
 
+
+install Pipeline Utility Steps plugin for read version from json file.
+
+
+
 # Jenkins Pipeline environment variables
 
 Skip to content
